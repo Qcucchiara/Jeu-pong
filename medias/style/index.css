@@ -1,0 +1,49 @@
+* {
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+main {
+  width: 100vw;
+  height: 100vh;
+  border: 1px solid black;
+}
+p {
+  position: absolute;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 1rem;
+}
+
+.score-p1 {
+  top: 10px;
+  left: 20px;
+}
+.score-p2 {
+  top: 10px;
+  right: 20px;
+}
+/* players ================================== */
+.players {
+  height: 130px;
+  width: 20px;
+  background-color: rgb(33, 126, 123);
+  position: absolute;
+}
+.player-1 {
+  top: 250px;
+  left: 20px;
+}
+.player-2 {
+  top: 250px;
+  right: 20px;
+}
+/* ball ===================================== */
+.ball {
+  border-radius: 9999px;
+  background-color: brown;
+  width: 30px;
+  aspect-ratio: 1;
+  position: absolute;
+  /* transition: 0.5s; */
+}
