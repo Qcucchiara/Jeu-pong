@@ -34,44 +34,6 @@ class Ball {
     }
   }
 
-  // init(startPos) {
-  //   const left = () => {
-  //     this.posX = 50;
-  //     this.posY = 295;
-  //     this.speedX = 2;
-  //     this.speedY = 1;
-  //     this.display();
-  //   };
-  //   const right = () => {
-  //     this.posX = window.innerWidth - (50 + this.width);
-  //     this.posY = 295;
-  //     this.speedX = -2;
-  //     this.speedY = 1;
-  //     this.display();
-  //   };
-
-  //   if (startPos === "left") {
-  //     // spawn la balle à gauche
-  //     // et reset ses valeurs de positions
-  //     left;
-  //   }
-  //   if (startPos === "right") {
-  //     // spawn la balle à droite
-  //     // et reset ses valeurs de positions
-  //     right;
-  //   }
-  //   if (startPos === "random") {
-  //     let r = Math.random() - 0.5;
-  //     if (r < 0) {
-  //       left;
-  //     }
-  //     if (r > 0) {
-  //       right;
-  //     }
-  //   }
-  //   super.createObject();
-  // }
-
   #speedX = this.speedX;
   #speedY = this.speedY;
 

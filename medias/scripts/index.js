@@ -5,9 +5,9 @@ let posYp2 = 250;
 const playersHeight = 130;
 const playersWidth = 20;
 const step = 10;
+
 let scoreP1 = 0;
 let scoreP2 = 0;
-
 const displayScoreP1 = document.querySelector(".score-p1");
 const displayScoreP2 = document.querySelector(".score-p2");
 displayScoreP1.innerText = scoreP1;
@@ -28,7 +28,7 @@ document.addEventListener("keydown", (event) => {
   }
   player1.style.top = posYp1 + "px";
 });
-document.addEventListener("keyup", () => {});
+// document.addEventListener("keyup", () => {});
 
 document.addEventListener("keydown", (event) => {
   // faire deux event listener pour éventuellement éviter le problème de double input

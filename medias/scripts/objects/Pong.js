@@ -41,17 +41,15 @@ function load() {
 
 function update(dt) {
   intervalUpdate = setInterval(() => {
-    player1.move();
-    player2.move();
+    // player1.move();
+    // player2.move();
   }, 100);
 }
 
 function draw() {
-  player1.display();
-
-  player2.display();
-
-  ball.display();
+  // player1.display();
+  // player2.display();
+  // ball.display();
 }
 
 function keypressed(key) {}
