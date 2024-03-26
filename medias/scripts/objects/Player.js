@@ -35,6 +35,8 @@ class Player {
     p.style.height = this.#height + "px";
     p.style.width = this.#width + "px";
     p.style.backgroundColor = "rgb(33, 126, 123)";
+    p.style.transition = "20ms";
+    p.classList.add("players");
     this.#gameArea.appendChild(p);
     if (name === "player-left") {
       p.classList.add(this.#leftStart.name);
@@ -51,7 +53,7 @@ class Player {
   #posY = this.#startPosY;
 
   /**
-   * pressedKeys est un tableau des touches qui sont appuyés, si une touche est relachée, sa valeur associé dans le tableau se supprime.
+   *  un tableau pressedKeys est daclaré dans le fichier de gameplay; il sert a savoir quels touches sont pressés, si une touche est relachée, sa valeur associé dans le tableau se supprime.
    *
    * la fonction isKeyPressed(key) permet de férifier si le tableau contient certaines valeures de touches.
    *
@@ -61,22 +63,7 @@ class Player {
    */
   move(stepY) {
     // ____________________
-    let pressedKeys = [];
-    window.addEventListener("keydown", function (event) {
-      if (!pressedKeys.includes(event.key)) {
-        pressedKeys.push(event.key);
-      }
-    });
-    window.addEventListener("keyup", function (event) {
-      let index = pressedKeys.indexOf(event.key);
-      if (index > -1) {
-        pressedKeys.splice(index, 1);
-      }
-    });
-    // Call this method in your other game logic to detect if key(s) are being held
-    function isKeyPressed(key) {
-      return pressedKeys.includes(key);
-    }
+
     // ____________________
 
     if (isKeyPressed(this.moveUp) && this.#posY > 0) {
@@ -91,10 +78,11 @@ class Player {
 
   /**
    * Sert a actualiser l'affichage du player en fonction de ce qui a été calculé dans la fonction 'move(...)'
+   *
+   * @param {object} object > sert a préciser quel player doit être actualisé.
    */
-  draw() {
-    let posY;
-    this.style.top = this.#posY + "px";
+  draw(object) {
+    object.style.top = this.#posY + "px";
   }
   /**
    * pour détecter la collision entre le player et la balle.
@@ -115,45 +103,3 @@ class Player {
     return true;
   }
 }
-
-// update(player1, player2) {
-//   if (
-//     (this.speedX < 0 &&
-//       rectIntersect(
-//         this.posX,
-//         this.posY,
-//         this.width,
-//         this.height,
-//         player1.posX,
-//         player1.posY,
-//         player1.width,
-//         player1.height
-//       )) ||
-//     (this.speedX > 0 &&
-//       rectIntersect(
-//         this.posX,
-//         this.posY,
-//         this.width,
-//         this.height,
-//         player2.posX,
-//         player2.posY,
-//         player2.width,
-//         player2.height
-//       ))
-//   ) {
-//     this.speedX = -this.speedX;
-//   }
-//   if (this.posY + this.height > window.innerHeight || this.posY < 0) {
-//     this.speedY = -this.speedY;
-//   }
-//   this.posX += this.speedX;
-//   this.posY += this.speedY;
-//   displayBall();
-// }
-
-const test = new Player("z", "s");
-
-setInterval(() => {
-  test.move(10);
-  test.draw();
-}, 100);

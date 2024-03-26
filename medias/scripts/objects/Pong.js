@@ -1,55 +1,41 @@
-let intervalUpdate;
-intervalUpdate;
+const p2 = new Player("ArrowUp", "ArrowDown");
+const p1 = new Player("z", "s");
+const playerLeft = document.querySelector(`.player-left`);
+const playerRight = document.querySelector(`.player-right`);
 
-function handleGame() {}
-function stopGame() {
-  clearInterval(intervalUpdate);
+let pressedKeys = [];
+
+function load() {
+  p1.create("player-left");
+  p2.create("player-right");
+}
+load();
+
+function update() {
+  p1.move(10);
+  p1.draw(playerLeft);
+
+  p2.move(10);
+  p2.draw(playerRight);
+}
+let loop = setInterval(update, 20);
+
+window.addEventListener("keydown", function (event) {
+  if (!pressedKeys.includes(event.key)) {
+    pressedKeys.push(event.key);
+  }
+});
+window.addEventListener("keyup", function (event) {
+  let index = pressedKeys.indexOf(event.key);
+  if (index > -1) {
+    pressedKeys.splice(index, 1);
+  }
+});
+
+function isKeyPressed(key) {
+  return pressedKeys.includes(key);
 }
 
 if (this.posX < 0 || this.posX + this.width > window.innerWidth) {
   ball.restart();
 }
-
-handleGame();
-ball.init("random");
-
-function load() {
-  let player1 = new Player(
-    "player-1",
-    "rgb(33, 126, 123)", //
-    20,
-    250, //
-    20, //
-    130, //
-    "z",
-    "s"
-  );
-
-  let player2 = new Player(
-    "player-2",
-    "rgb(33, 126, 123)", //
-    window.innerWidth - 40,
-    250, //
-    20, //
-    130, //
-    "ArrowUp",
-    "ArrowDown"
-  );
-
-  let ball = new Ball("ball", "red", 50, 295, 30, 30, 2, 1);
-}
-
-function update(dt) {
-  intervalUpdate = setInterval(() => {
-    // player1.move();
-    // player2.move();
-  }, 100);
-}
-
-function draw() {
-  // player1.display();
-  // player2.display();
-  // ball.display();
-}
-
-function keypressed(key) {}

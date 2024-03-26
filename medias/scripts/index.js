@@ -4,7 +4,7 @@ let posYp1 = 250;
 let posYp2 = 250;
 const playersHeight = 130;
 const playersWidth = 20;
-const step = 10;
+const step = 3;
 
 let scoreP1 = 0;
 let scoreP2 = 0;
@@ -13,39 +13,23 @@ const displayScoreP2 = document.querySelector(".score-p2");
 displayScoreP1.innerText = scoreP1;
 displayScoreP2.innerText = scoreP2;
 
-document.addEventListener("keydown", (event) => {
-  switch (event.key) {
-    case "z":
-      if (posYp1 > 0) {
-        posYp1 -= step;
-      }
-      break;
-    case "s":
-      if (posYp1 + 130 < window.innerHeight) {
-        posYp1 += step;
-      }
-      break;
-  }
-  player1.style.top = posYp1 + "px";
-});
-// document.addEventListener("keyup", () => {});
+let pressedKeys = [];
 
-document.addEventListener("keydown", (event) => {
-  // faire deux event listener pour éventuellement éviter le problème de double input
-  switch (event.key) {
-    case "ArrowUp":
-      if (posYp2 > 0) {
-        posYp2 -= step;
-      }
-      break;
-    case "ArrowDown":
-      if (posYp2 + 130 < window.innerHeight) {
-        posYp2 += step;
-      }
-      break;
+window.addEventListener("keydown", function (event) {
+  if (!pressedKeys.includes(event.key)) {
+    pressedKeys.push(event.key);
   }
-  player2.style.top = posYp2 + "px";
 });
+window.addEventListener("keyup", function (event) {
+  let index = pressedKeys.indexOf(event.key);
+  if (index > -1) {
+    pressedKeys.splice(index, 1);
+  }
+});
+
+function isKeyPressed(key) {
+  return pressedKeys.includes(key);
+}
 
 const ball = document.querySelector(".ball");
 const ballD = 30;
@@ -56,21 +40,46 @@ let speedY = 0;
 let rebondissementsX = 0;
 
 document.addEventListener("keydown", (event) => {
+  if (event.key === " ") {
+    console.log(speedX);
+    console.log(speedY);
+  }
   if (event.key === " " && speedX == 0 && speedY == 0) {
     if (ballX > window.innerWidth / 2) {
       speedX = -2 - (Math.random() - 0.5) * 2;
     } else {
-      speedX = 2 + (Math.random() - 0.5) * 2;
+      speedX = 2 + rebondissementsX * 1 * 0.1 + (Math.random() - 0.5) * 2;
     }
 
     speedY = (Math.random() - 0.5) * 3;
   }
-  console.log(speedY);
 });
 
 let intervalUpdate = setInterval(update, 10);
 
 function update() {
+  if (posYp1 > 0 && isKeyPressed("z")) {
+    posYp1 -= step;
+  }
+
+  if (posYp1 + 130 < window.innerHeight && isKeyPressed("s")) {
+    posYp1 += step;
+  }
+
+  player1.style.top = posYp1 + "px";
+
+  // document.addEventListener("keyup", () => {});
+
+  if (posYp2 > 0 && isKeyPressed("ArrowUp")) {
+    posYp2 -= step;
+  }
+
+  if (posYp2 + 130 < window.innerHeight && isKeyPressed("ArrowDown")) {
+    posYp2 += step;
+  }
+
+  player2.style.top = posYp2 + "px";
+
   if (
     // ballX + ball.clientWidth > window.innerWidth ||
     (speedX < 0 &&

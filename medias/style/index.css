@@ -47,3 +47,6 @@ p {
   position: absolute;
   /* transition: 0.5s; */
 }
+.compteur {
+  margin: auto;
+}
