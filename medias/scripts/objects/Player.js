@@ -53,7 +53,7 @@ class Player {
   #posY = this.#startPosY;
 
   /**
-   *  un tableau pressedKeys est daclaré dans le fichier de gameplay; il sert a savoir quels touches sont pressés, si une touche est relachée, sa valeur associé dans le tableau se supprime.
+   * un tableau pressedKeys est déclaré dans le fichier de gameplay; il sert a savoir quels touches sont pressés, si une touche est relachée, sa valeur associé dans le tableau se supprime.
    *
    * la fonction isKeyPressed(key) permet de férifier si le tableau contient certaines valeures de touches.
    *
@@ -62,10 +62,6 @@ class Player {
    * @param {number} stepY > step à chaque actualisation en px (permet d'ajuster la vitesse voir anticiper un élément de gameplay suplémentaire)
    */
   move(stepY) {
-    // ____________________
-
-    // ____________________
-
     if (isKeyPressed(this.moveUp) && this.#posY > 0) {
       this.#posY -= stepY;
     } else if (

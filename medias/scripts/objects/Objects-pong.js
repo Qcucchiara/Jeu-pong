@@ -38,11 +38,14 @@ class Ball {
     p.style.backgroundColor = "brown";
     p.style.transition = "20ms";
     p.classList.add("ball");
+    this.gameArea.appendChild(p);
   }
 
   /**
-   * fdhsfvfdqvf
-   * @param {string} gagnant > dgsfdnbgdf
+   * Permet de changer la position de départ de la balle
+   * en fonction de celui qui a gagné le tour précédent
+   *
+   * @param {boolean} gagnant > [peut être un string] player qui a gagné le tour précédent
    */
   startPosition(gagnant) {
     if (
@@ -66,7 +69,7 @@ class Ball {
    * calcule les déplacements de la balle (linéaire)
    */
   move() {
-    //
+    this.style.top += 0;
   }
 
   #rectIntersect(x1, y1, w1, h1, x2, y2, w2, h2) {
