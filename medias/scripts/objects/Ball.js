@@ -1,4 +1,12 @@
 class Ball {
+  #posX = 0;
+  #posY = 295;
+  #width = 30;
+  #height = 30;
+  #speedX = 0;
+  #speedY = 0;
+  #pos = Math.random() - 0.5;
+
   /**
    * @param {string} speedX > [a enlever ?] pas en X a chaque actualisation de la balle
    * @param {string} speedY > [a enlever ?] pas en Y a chaque actualisation de la balle
@@ -11,11 +19,26 @@ class Ball {
   }
 
   /**
-   * Pour créer la balle au début de la partie
+   * => peut être "left", "right" ou laissé vide pour que le start soit random
+   *
+   * @param {string} startPos > détermine la position de départ de la balle
    *
    */
-  create() {
-    //
+  create(startPos) {
+    const gameArea = document.querySelector(".gameScreen");
+    const p = document.createElement("div");
+
+    startPosition(startPos);
+
+    p.style.position = "absolute";
+    p.style.left = this.#posX + "px";
+    p.style.top = this.#posY + "px";
+    p.style.height = this.#height + "px";
+    p.style.width = this.#width + "px";
+    p.style.backgroundColor = "brown";
+    p.style.transition = "20ms";
+    p.classList.add("ball");
+    this.gameArea.appendChild(p);
   }
 
   /**
@@ -25,61 +48,28 @@ class Ball {
    * @param {boolean} gagnant > [peut être un string] player qui a gagné le tour précédent
    */
   startPosition(gagnant) {
-    if (condition) {
-      // a gauche
-    } else if (condition) {
-      // a droite
-    } else {
-      // random
+    if (
+      startPos === "left" ||
+      (this.#pos < 0 && startPos != "left" && startPos != "right")
+    ) {
+      this.#posX = 40;
+      this.#speedX = +this.#speedX;
+      p.style.left = this.#posX + "px";
+    } else if (
+      startPos === "right" ||
+      (this.#pos > 0 && startPos != "left" && startPos != "right")
+    ) {
+      this.#posX = window.innerWidth - (40 + this.#width);
+      p.style.left = this.#posX + "px";
+      this.#speedX = -this.#speedX;
     }
   }
-
-  // init(startPos) {
-  //   const left = () => {
-  //     this.posX = 50;
-  //     this.posY = 295;
-  //     this.speedX = 2;
-  //     this.speedY = 1;
-  //     this.display();
-  //   };
-  //   const right = () => {
-  //     this.posX = window.innerWidth - (50 + this.width);
-  //     this.posY = 295;
-  //     this.speedX = -2;
-  //     this.speedY = 1;
-  //     this.display();
-  //   };
-
-  //   if (startPos === "left") {
-  //     // spawn la balle à gauche
-  //     // et reset ses valeurs de positions
-  //     left;
-  //   }
-  //   if (startPos === "right") {
-  //     // spawn la balle à droite
-  //     // et reset ses valeurs de positions
-  //     right;
-  //   }
-  //   if (startPos === "random") {
-  //     let r = Math.random() - 0.5;
-  //     if (r < 0) {
-  //       left;
-  //     }
-  //     if (r > 0) {
-  //       right;
-  //     }
-  //   }
-  //   super.createObject();
-  // }
-
-  #speedX = this.speedX;
-  #speedY = this.speedY;
 
   /**
    * calcule les déplacements de la balle (linéaire)
    */
   move() {
-    //
+    this.style.top += 0;
   }
 
   #rectIntersect(x1, y1, w1, h1, x2, y2, w2, h2) {

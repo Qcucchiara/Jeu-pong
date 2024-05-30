@@ -1,5 +1,13 @@
+// premier fichier, aucune POO et manque d'organisation...
+// mais ça fonctionne.
+
+// variables
+
+// sélectionner les div des joueurs
 const player1 = document.querySelector(".player-1");
 const player2 = document.querySelector(".player-2");
+
+// des valeurs en vrac utilisés plus bas
 let posYp1 = 250;
 let posYp2 = 250;
 const playersHeight = 130;
@@ -8,29 +16,16 @@ const step = 3;
 
 let scoreP1 = 0;
 let scoreP2 = 0;
+
+// sélectionner le score des joueurs respectifs
 const displayScoreP1 = document.querySelector(".score-p1");
 const displayScoreP2 = document.querySelector(".score-p2");
+
+// afficher le score des joueurs
 displayScoreP1.innerText = scoreP1;
 displayScoreP2.innerText = scoreP2;
 
-let pressedKeys = [];
-
-window.addEventListener("keydown", function (event) {
-  if (!pressedKeys.includes(event.key)) {
-    pressedKeys.push(event.key);
-  }
-});
-window.addEventListener("keyup", function (event) {
-  let index = pressedKeys.indexOf(event.key);
-  if (index > -1) {
-    pressedKeys.splice(index, 1);
-  }
-});
-
-function isKeyPressed(key) {
-  return pressedKeys.includes(key);
-}
-
+// des variables en vrac relatives à la balle.
 const ball = document.querySelector(".ball");
 const ballD = 30;
 let ballX = 50;
@@ -39,6 +34,30 @@ let speedX = 0;
 let speedY = 0;
 let rebondissementsX = 0;
 
+// cette variable contient la valeur de l'input.key de chaque touche appuyés.
+let pressedKeys = [];
+
+// cet eventListeners sert a ajouter les touches pressés dans le tableau plus haut
+window.addEventListener("keydown", function (event) {
+  if (!pressedKeys.includes(event.key)) {
+    pressedKeys.push(event.key);
+  }
+});
+// celui là sert a retirer la valeur de la touche relachée
+window.addEventListener("keyup", function (event) {
+  let index = pressedKeys.indexOf(event.key);
+  if (index > -1) {
+    pressedKeys.splice(index, 1);
+  }
+});
+
+// cette fonction retourne un boolean qui est vrai si la touche demandé est dans le tableau
+// des touches appuyés
+function isKeyPressed(key) {
+  return pressedKeys.includes(key);
+}
+
+// ce morceau sert a lancer la balle quand elle est en position de départ
 document.addEventListener("keydown", (event) => {
   if (event.key === " ") {
     console.log(speedX);
@@ -55,33 +74,31 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
+// cette partie joue la fonction update() toutes les 10ms
 let intervalUpdate = setInterval(update, 10);
 
+// la fonction update() sert a actualiser les variables et l'affichage
+// de tout ce qui doit bouger.
+// les colisions sont aussi gérés ici.
 function update() {
+  // gère le déplacement du joueur, notamment en comparant la touche au tableau mentionné plus haut.
   if (posYp1 > 0 && isKeyPressed("z")) {
     posYp1 -= step;
   }
-
   if (posYp1 + 130 < window.innerHeight && isKeyPressed("s")) {
     posYp1 += step;
   }
-
   player1.style.top = posYp1 + "px";
-
-  // document.addEventListener("keyup", () => {});
-
   if (posYp2 > 0 && isKeyPressed("ArrowUp")) {
     posYp2 -= step;
   }
-
   if (posYp2 + 130 < window.innerHeight && isKeyPressed("ArrowDown")) {
     posYp2 += step;
   }
-
   player2.style.top = posYp2 + "px";
 
+  // collision de la balle contre les joueurs.
   if (
-    // ballX + ball.clientWidth > window.innerWidth ||
     (speedX < 0 &&
       rectIntersect(
         ballX,
@@ -104,8 +121,9 @@ function update() {
         playersWidth,
         playersHeight
       ))
-    // || ballX < 0
   ) {
+    // sert a modifier le comportement du rebond en fonction de la section des joueurs.
+
     if (ballX > window.innerWidth / 2) {
       if (ballY + ballD / 2 <= posYp2 + 26) {
         speedY -= 1.8;
@@ -120,9 +138,7 @@ function update() {
         console.log(
           "right  -0.2" + ` pos player:${posYp2} pos ball:${ballY + ballD / 2}`
         );
-      }
-      // if (posYp2 + 52 > ballY (+ ballD/2) && ballY (+ ballD/2) <= posYp2 + 78) {}
-      else if (
+      } else if (
         posYp2 + 78 > ballY + ballD / 2 &&
         ballY + ballD / 2 <= posYp2 + 104
       ) {
@@ -177,6 +193,8 @@ function update() {
     rebondissementsX += 1;
     console.log(`${rebondissementsX}`);
   }
+
+  // gère les rebondissements sur les bords verticaux de l'affichage
   if (ballY + ball.clientHeight > window.innerHeight || ballY < 0) {
     speedY = -speedY;
   }
@@ -185,6 +203,9 @@ function update() {
 
   ball.style.left = `${ballX}px`;
   ball.style.top = `${ballY}px`;
+
+  // sert arrêter la partie quand la balle touche le camp d'un joueur.
+
   if (ballX + ballD > window.innerWidth) {
     scoreP1++;
     resetGameState2();
@@ -237,14 +258,14 @@ function rectIntersect(x1, y1, w1, h1, x2, y2, w2, h2) {
   return true;
 }
 
-// const body = document.querySelector("body");
+const body = document.querySelector("body");
 
-// const myInterval = setInterval(setColor, 17);
+// const myInterval = setInterval(setColor, 50);
 
 // function setColor() {
 //   let x = document.body;
 //   x.style.backgroundColor =
-//     x.style.backgroundColor == "yellow" ? "pink" : "yellow";
+//     x.style.backgroundColor == "yellow" ? "red" : "yellow";
 // }
 
 // function stopColor() {

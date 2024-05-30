@@ -15,6 +15,7 @@ Une structure html nécessaire pour lancer sur le navigateur, un fichier css pou
 Comme dit plus haut, la POO a été utilisé pour les différents éléments du jeu qui permettent de générer et utiliser les raquettes et la balle à l'aide des différentes méthodes présentes dans les classes.
 
 #### ! je n'ai pas terminé d'intégrer la POO, actuellement le fichier js lu est la première version qui n'utilise pas la POO et qui n'est pas commenté.
+Les fichiers intégrant la POO sont Player.js, Ball.js et Pong.js Jeu.html servait a tester le code en POO.
 
 ## classes :
 
